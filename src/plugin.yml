@@ -1,0 +1,5 @@
+name: WaterWars
+version: 1.0.0
+description: WaterWars
+depend: [ParadiseCore]
+main: me.chasertw123.minigames.waterwars.Main
