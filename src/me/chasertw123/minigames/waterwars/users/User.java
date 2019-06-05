@@ -1,9 +1,10 @@
 package me.chasertw123.minigames.waterwars.users;
 
 import com.mongodb.client.model.Filters;
-import com.mongodb.client.model.UpdateOptions;
 import com.mongodb.client.result.UpdateResult;
-import me.chasertw123.minigames.core.database.NoSQLDatabase;
+import me.chasertw123.minigames.core.api.v2.CoreAPI;
+import me.chasertw123.minigames.core.database.GenericDatabaseMethods;
+import me.chasertw123.minigames.shared.database.Database;
 import me.chasertw123.minigames.shared.framework.ServerGameType;
 import me.chasertw123.minigames.waterwars.Main;
 import me.chasertw123.minigames.wws.unlocks.cages.Cage;
@@ -43,8 +44,10 @@ public class User implements WaterWarsUser {
         Main.newChain()
                 .asyncFirst(() -> {
 
-                    if (me.chasertw123.minigames.core.Main.getNoSQLDatabase().containsUser(me.chasertw123.minigames.core.Main.getNoSQLDatabase().getCollection(ServerGameType.WATER_WARS), user.getUUID()))
-                        return me.chasertw123.minigames.core.Main.getNoSQLDatabase().getCollection(ServerGameType.WATER_WARS).find(Filters.eq("uuid", user.getUUID().toString())).first();
+                    Database database = CoreAPI.getDatabase();
+
+                    if (GenericDatabaseMethods.containsUser(database.getMongoCollection(ServerGameType.WATER_WARS), user.getUUID()))
+                        return database.getMongoCollection(ServerGameType.WATER_WARS).find(Filters.eq("uuid", user.getUUID().toString())).first();
 
                     else
                         return null;
@@ -215,8 +218,8 @@ public class User implements WaterWarsUser {
                 .append("kits", wwKits)
                 .append("cages", wwCages);
 
-        UpdateResult result = NoSQLDatabase.getNoSQLDatabase().getCollection(ServerGameType.WATER_WARS)
-                .replaceOne(Filters.eq("uuid", getPlayer().getUniqueId().toString()), wwData, new UpdateOptions().upsert(true));
+        UpdateResult result = CoreAPI.getDatabase().getMongoCollection(ServerGameType.WATER_WARS)
+                .replaceOne(Filters.eq("uuid", getPlayer().getUniqueId().toString()), wwData, Database.upsert());
 
         return result.getModifiedCount() >= result.getMatchedCount();
     }
