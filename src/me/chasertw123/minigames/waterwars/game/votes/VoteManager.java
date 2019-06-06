@@ -45,5 +45,4 @@ public class VoteManager {
 
         return highestName;
     }
-
 }

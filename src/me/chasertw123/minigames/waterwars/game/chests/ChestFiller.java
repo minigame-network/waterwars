@@ -141,7 +141,7 @@ public class ChestFiller {
     }
 
     public void fill(){
-        for(List<Location> islandChest : Main.getGameManager().map.islandsChests()){
+        for(List<Location> islandChest : Main.getGameManager().getMap().islandsChests()){
             for(GameItem g : tier1Items){
                 if(getRandomPercent() < g.getChance()){
                     int id = random.nextInt(islandChest.size());
@@ -163,7 +163,7 @@ public class ChestFiller {
             }
         }
 
-        List<Location> tier2GC = Main.getGameManager().map.getTier2chests();
+        List<Location> tier2GC = Main.getGameManager().getMap().getTier2chests();
         for(GameItem g : tier2Items){
             if(getRandomPercent() < g.getChance()){
                 int cid = random.nextInt(tier2GC.size());
@@ -186,7 +186,7 @@ public class ChestFiller {
             }
         }
 
-        List<Location> tier3GC = Main.getGameManager().map.getTier3chests();
+        List<Location> tier3GC = Main.getGameManager().getMap().getTier3chests();
         for(GameItem g : tier3Items){
             if(getRandomPercent() < g.getChance()){
                 int cid = random.nextInt(tier3GC.size());

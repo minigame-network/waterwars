@@ -46,7 +46,7 @@ public class Loop_Respawn extends GameLoop {
                 if (player.getUniqueId() != user.getPlayer().getUniqueId())
                     player.showPlayer(user.getPlayer());
 
-            Main.getGameManager().chestFiller.fillIsland(Main.getGameManager().map.getIslandData(user.getIsland()));
+            Main.getGameManager().getChestFiller().fillIsland(Main.getGameManager().getMap().getIslandData(user.getIsland()));
 
             user.getPlayer().getInventory().clear();
 
@@ -57,7 +57,7 @@ public class Loop_Respawn extends GameLoop {
             user.getPlayer().spigot().setCollidesWithEntities(true);
             user.getPlayer().getInventory().addItem(new cItemStack(Material.COMPASS).setDisplayName(ChatColor.GREEN + "Player Tracker " + ChatColor.GRAY + "(Hold for Info)"));
             user.getPlayer().setGameMode(GameMode.SURVIVAL);
-            user.getPlayer().teleport(Main.getGameManager().map.getIslandData(user.getIsland()).getSpawn());
+            user.getPlayer().teleport(Main.getGameManager().getMap().getIslandData(user.getIsland()).getSpawn());
             user.setDead(false);
 
             if (user.getPlayer().isFlying())

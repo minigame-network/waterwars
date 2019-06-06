@@ -11,8 +11,8 @@ import java.util.List;
  */
 public class GameMap extends BaseMap {
 
-    private Location mapcenter;
-    private int max_radius, max_y, water_y;
+    private Location mapCenter;
+    private int maxRadius, maxY, waterY;
     private List<Location> tier2chests, tier3chests;
 
     private List<IslandData> islandData;
@@ -20,11 +20,11 @@ public class GameMap extends BaseMap {
     public GameMap(String map){
         super(map);
 
-        this.max_radius = getConfigFile().getInt("map.max-radius");
-        this.max_y = getConfigFile().getInt("map.max-y");
-        this.water_y = getConfigFile().getInt("map.water-y");
+        this.maxRadius = getConfigFile().getInt("map.max-radius");
+        this.maxY = getConfigFile().getInt("map.max-y");
+        this.waterY = getConfigFile().getInt("map.water-y");
 
-        this.mapcenter = getLocation(getConfigFile().getString("map.center"));
+        this.mapCenter = getLocation(getConfigFile().getString("map.center"));
 
         this.tier2chests = getLocationList(getConfigFile().getStringList("tierchests.2"));
         this.tier3chests = getLocationList(getConfigFile().getStringList("tierchests.3"));
@@ -41,20 +41,20 @@ public class GameMap extends BaseMap {
         return data;
     }
 
-    public Location getMapcenter() {
-        return mapcenter;
+    public Location getMapCenter() {
+        return mapCenter;
     }
 
-    public int getMax_radius() {
-        return max_radius;
+    public int getMaxRadius() {
+        return maxRadius;
     }
 
-    public int getMax_y() {
-        return max_y;
+    public int getMaxY() {
+        return maxY;
     }
 
-    public int getWater_y() {
-        return water_y;
+    public int getWaterY() {
+        return waterY;
     }
 
     public List<Location> getTier2chests() {
@@ -94,5 +94,4 @@ public class GameMap extends BaseMap {
         return new Location(Main.getMapManager().getGameWorld(), Integer.parseInt(parts[0].replaceAll(" ", "")),
                 Integer.parseInt(parts[1].replaceAll(" ", "")), Integer.parseInt(parts[2].replaceAll(" ", "")));
     }
-
 }

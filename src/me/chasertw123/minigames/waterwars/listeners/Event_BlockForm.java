@@ -19,10 +19,10 @@ public class Event_BlockForm implements Listener {
 
     @EventHandler
     public void onBlockForm(BlockFormEvent e) {
-        if(Main.getGameManager().worldDisintegration != null) {
-            Location center = Main.getGameManager().map.getMapcenter().clone();
+        if(Main.getGameManager().getWorldDisintegration() != null) {
+            Location center = Main.getGameManager().getMap().getMapCenter().clone();
 
-            WorldDisintegration worldDisintegration = Main.getGameManager().worldDisintegration;
+            WorldDisintegration worldDisintegration = Main.getGameManager().getWorldDisintegration();
 
             if (worldDisintegration.getCurrentRadius() + center.getBlockX() <= e.getBlock().getLocation().getBlockX()
                     || worldDisintegration.getCurrentRadius() + center.getBlockZ() <= e.getBlock().getLocation().getBlockZ()) {

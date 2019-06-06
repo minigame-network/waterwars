@@ -22,11 +22,11 @@ public class SB_Game extends SimpleScoreboard {
             @Override
             public String getTitle(Player player) {
 
-                int time = Main.getGameManager().gameLoop.interval, minutes = time / 60, seconds = time % 60;
+                int time = Main.getGameManager().getGameLoop().interval, minutes = time / 60, seconds = time % 60;
                 String mins = (minutes < 10 ? "0" : "") + minutes, secs = (seconds < 10 ? "0" : "") + seconds;
 
                 return ChatColor.AQUA + "" + ChatColor.BOLD + "Water" + ChatColor.BLUE + "" + ChatColor.BOLD + "Wars "
-                        + ChatColor.GREEN + (Main.getGameManager().worldDisintegration != null ? "[DM]" :  mins + ":" + secs);
+                        + ChatColor.GREEN + (Main.getGameManager().getWorldDisintegration() != null ? "[DM]" :  mins + ":" + secs);
             }
 
             @Override

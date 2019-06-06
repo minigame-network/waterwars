@@ -25,7 +25,6 @@ import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Created by Chase on 2/18/2017.
@@ -33,25 +32,17 @@ import java.util.Random;
 public class GameManager {
 
     public static final int MIN_PLAYERS = 2, MAX_PLAYERS = 12;
-    private Random r = new Random();
 
-    public GameLoop gameLoop;
-    private boolean teamGame, inCages = true;
+    private GameLoop gameLoop;
+    private boolean inCages = true;
     private GameState gameState = GameState.LOBBY;
-    public GameMap map;
-
-    public WorldDisintegration worldDisintegration = null;
-
-    public ChestFiller chestFiller;
+    private GameMap map;
+    private WorldDisintegration worldDisintegration = null;
+    private ChestFiller chestFiller;
 
     public GameManager() {
-        teamGame = Main.getInstance().getConfig().getBoolean("settings.teams.enabled");
-
-        if (teamGame)
-            for (int i = 1; i <= Main.getInstance().getConfig().getInt("settings.teams.amount"); i++);
-                //CoreAPIAPI.getTeamManager().registerTeam(new Team());
-
         gameLoop = new Loop_Lobby();
+
         CoreAPI.getServerDataManager().updateServerState(GeneralServerStatus.LOBBY, MAX_PLAYERS);
     }
 
@@ -97,7 +88,7 @@ public class GameManager {
 
             player.teleport(map.getIslandData(id).getSpawn().clone().add(0.5, 0, 0.5));
 
-            Vector dir = map.getMapcenter().clone().subtract(player.getEyeLocation()).toVector();
+            Vector dir = map.getMapCenter().clone().subtract(player.getEyeLocation()).toVector();
             Location newLocation = player.getLocation().setDirection(dir);
             player.teleport(newLocation);
 
@@ -165,12 +156,12 @@ public class GameManager {
     public void startDeathmatch(){
         // Enter deathmatch
 
-        worldDisintegration = new WorldDisintegration(Main.getMapManager().getGameWorld(), map.getMapcenter(), map.getMax_radius(), map.getWater_y(), map.getMax_y());
+        worldDisintegration = new WorldDisintegration(Main.getMapManager().getGameWorld(), map.getMapCenter(), map.getMaxRadius(), map.getWaterY(), map.getMaxY());
 
         BuffManager buffManager = new BuffManager();
 
         for(User user : Main.getUserManager().toCollection()) {
-            user.sendMessage(ChatColor.YELLOW + "The Deathmatch has Started. " + ChatColor.RED + "!WIP: The world will slowly fade away!");
+            user.sendMessage(ChatColor.YELLOW + "The Deathmatch has Started.");
 
             if(!user.isFullDead()) { // They're alive
                 int buffs = user.getLives() + user.getKills();
@@ -235,5 +226,21 @@ public class GameManager {
 
     public void setInCages(boolean inCages) {
         this.inCages = inCages;
+    }
+
+    public GameLoop getGameLoop() {
+        return this.gameLoop;
+    }
+
+    public ChestFiller getChestFiller() {
+        return this.chestFiller;
+    }
+
+    public WorldDisintegration getWorldDisintegration() {
+        return this.worldDisintegration;
+    }
+
+    public GameMap getMap() {
+        return this.map;
     }
 }

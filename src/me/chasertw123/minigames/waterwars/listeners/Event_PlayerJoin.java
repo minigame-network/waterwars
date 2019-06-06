@@ -39,7 +39,7 @@ public class Event_PlayerJoin implements Listener {
         if (Main.getGameManager().getGameState() != GameState.LOBBY) {
 
             e.setJoinMessage(null);
-            e.getPlayer().teleport(Main.getGameManager().map.getMapcenter());
+            e.getPlayer().teleport(Main.getGameManager().getMap().getMapCenter());
 
             User user = new User(CoreAPI.getUser(e.getPlayer()));
             Main.getUserManager().add(user);

@@ -23,18 +23,18 @@ public class Event_BlockPlace implements Listener {
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent e) {
 
-        if (Main.getGameManager().map.getMax_y() < e.getBlock().getLocation().getBlockY()) {
+        if (Main.getGameManager().getMap().getMaxY() < e.getBlock().getLocation().getBlockY()) {
             e.setCancelled(true);
             return;
         }
 
-        Location center = Main.getGameManager().map.getMapcenter().clone();
-        if (Main.getGameManager().map.getMax_radius() + center.getBlockX() <= e.getBlock().getLocation().getBlockX()
-                || Main.getGameManager().map.getMax_radius() + center.getBlockZ() <= e.getBlock().getLocation().getBlockZ())
+        Location center = Main.getGameManager().getMap().getMapCenter().clone();
+        if (Main.getGameManager().getMap().getMaxRadius() + center.getBlockX() <= e.getBlock().getLocation().getBlockX()
+                || Main.getGameManager().getMap().getMaxRadius() + center.getBlockZ() <= e.getBlock().getLocation().getBlockZ())
             e.setCancelled(true);
 
-        if (Main.getGameManager().worldDisintegration != null) {
-            WorldDisintegration worldDisintegration = Main.getGameManager().worldDisintegration;
+        if (Main.getGameManager().getWorldDisintegration() != null) {
+            WorldDisintegration worldDisintegration = Main.getGameManager().getWorldDisintegration();
 
             if (worldDisintegration.getCurrentRadius() + center.getBlockX() <= e.getBlock().getLocation().getBlockX()
                     || worldDisintegration.getCurrentRadius() + center.getBlockZ() <= e.getBlock().getLocation().getBlockZ()) {

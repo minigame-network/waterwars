@@ -39,8 +39,8 @@ public class Loop_PlayerTracker extends GameLoop {
 
             Player target = null;
             double distance = 0;
-            int radiusToCheck = Main.getGameManager().map.getMax_radius();
-            for (Entity entity : player.getNearbyEntities(radiusToCheck, Main.getGameManager().map.getMax_y(), radiusToCheck)) {
+            int radiusToCheck = Main.getGameManager().getMap().getMaxRadius();
+            for (Entity entity : player.getNearbyEntities(radiusToCheck, Main.getGameManager().getMap().getMaxY(), radiusToCheck)) {
 
                 if (!(entity instanceof Player))
                     continue;
